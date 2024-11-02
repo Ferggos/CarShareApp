@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.LoginActivity">
+
+
+    <LinearLayout
+        android:id="@+id/llDataFCs"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <!-- ImageButton для аватара -->
+            <ImageButton
+                android:id="@+id/ibPhotoExport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/addavatar"
+                android:src="@drawable/ic_photo_export_not" />
+
+            <!-- Иконка "плюс" поверх аватара -->
+            <ImageView
+                android:id="@+id/ivAddPhotoPlus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="4dp"
+                android:contentDescription="@string/addavatar"
+                android:src="@drawable/ic_plus" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvPhotoExportInfo"
+            style="@style/SideText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/PhotoExportInfo" />
+
+        <TextView
+            android:id="@+id/tvDriverLicense"
+            style="@style/SideText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/drivinglicensenumber" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDriverLicense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/light_gray"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/gray">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputDL"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/drivinglicensemask"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvDriverLicenseDateOfIssue"
+            style="@style/SideText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/DLDate" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDriverLicenseDateOfIssue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/light_gray"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/gray">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputDLDate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="8dp"
+                android:hint="@string/datemask"
+                android:inputType="date"
+                android:focusable="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvDriverLicensePhoto"
+            style="@style/SideText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/enterDLPhoto" />
+
+        <LinearLayout
+            android:id="@+id/llDLUploadPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivUploadDVPhotoIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="@string/enterDLPhoto"
+                android:src="@drawable/ic_upload" />
+
+            <TextView
+                android:id="@+id/ivUploadDLPhotoText"
+                style="@style/SideText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="@string/uploadPhoto" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPassortPhoto"
+            style="@style/SideText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/uploadPassportPhoto" />
+
+        <LinearLayout
+            android:id="@+id/llPassportUploadPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/ivUploadPassportPhotoIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="@string/enterDLPhoto"
+                android:src="@drawable/ic_upload" />
+
+            <TextView
+                android:id="@+id/ivUploadPassortPhotoText"
+                style="@style/SideText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="@string/uploadPhoto" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/shape_roundedbtn"
+        android:text="@string/Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

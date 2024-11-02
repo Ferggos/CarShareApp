@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/noconnection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivNoConnect"
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/no_connection"
+        app:layout_constraintBottom_toTopOf="@+id/tvNoConnect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_noconnect"/>
+
+    <TextView
+        android:id="@+id/tvNoConnect"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/warningNoConnection"
+        android:textAlignment="center"
+        style="@style/Header1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTryToReconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:text="@string/CheckEthernet"
+        style = "@style/BaseText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNoConnect" />
+
+    <Button
+        android:id="@+id/btnRepeatConnect"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_margin="40dp"
+        android:text="@string/buttonRepeatConnect"
+        style = "@style/BtnFillStyle"
+        android:background = "@drawable/shape_roundedbtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
