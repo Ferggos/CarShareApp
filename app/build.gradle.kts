@@ -59,9 +59,10 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.recyclerview)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
-    implementation (libs.androidx.room.runtime) // Библиотека "Room"
-    implementation (libs.androidx.room.ktx) // Дополнительно для Kotlin Coroutines, Kotlin Flows
-    ksp(libs.androidx.room.compiler) // Кодогенератор
+    implementation (libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
+    implementation (libs.mindrot.jbcrypt)
+    ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
