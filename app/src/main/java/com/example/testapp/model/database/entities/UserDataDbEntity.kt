@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 @Entity(tableName = "user_data")
 data class UserDataDbEntity(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val surname: String,
     val name: String,
     @ColumnInfo(name = "middle_name") val middleName: String,

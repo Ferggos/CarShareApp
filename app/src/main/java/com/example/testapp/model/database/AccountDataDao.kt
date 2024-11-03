@@ -17,5 +17,5 @@ interface AccountDataDao {
     fun getAccountData(): List<AccountInfoTuple>
 
     @Query("DELETE FROM account_data WHERE id = :accountDataId")
-    fun deleteStatisticDataById(accountDataId: Long)
+    fun deleteAccountDataById(accountDataId: Long)
 }
