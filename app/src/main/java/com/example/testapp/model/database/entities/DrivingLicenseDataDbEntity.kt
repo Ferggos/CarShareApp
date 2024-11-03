@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 @Entity(tableName = "driving_license_data")
 data class DrivingLicenseDataDbEntity(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "dl_number") val dlNum: Long,
     @ColumnInfo(name = "dl_date") val dlDate: LocalDate,
     @ColumnInfo(name = "dl_photo") val dlPhoto: ByteArray

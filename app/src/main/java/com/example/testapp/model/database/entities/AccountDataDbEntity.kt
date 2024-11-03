@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 
 @Entity(
-    tableName = "statistic",
+    tableName = "account_data",
     indices = [Index("id")],
     foreignKeys = [
         ForeignKey(

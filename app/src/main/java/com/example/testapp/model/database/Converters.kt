@@ -1,7 +1,10 @@
 package com.example.testapp.model.database
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
 import org.mindrot.jbcrypt.BCrypt
+import java.io.ByteArrayOutputStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -19,15 +22,16 @@ class Converters {
         return date?.format(formatter)
     }
 
-    // Конвертация для изображений
     @TypeConverter
-    fun fromByteArray(byteArray: ByteArray?): String? {
-        return byteArray?.let { String(it) }
+    fun fromBitmap(bitmap: Bitmap): ByteArray {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        return stream.toByteArray()
     }
 
     @TypeConverter
-    fun toByteArray(imageString: String?): ByteArray? {
-        return imageString?.toByteArray()
+    fun toBitmap(byteArray: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
     // Хеширование пароля
