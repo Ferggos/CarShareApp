@@ -103,7 +103,7 @@ class RegistrationFragment3 : Fragment() {
                 PhotoType.AVATAR -> avatarPhotoUri = selectedUri
                 PhotoType.DL_UPLOAD -> dlUploadPhotoUri = selectedUri
                 PhotoType.PASSPORT -> passportUploadPhotoUri = selectedUri
-                null -> TODO()
+                else -> throw IllegalArgumentException("Unknown photo type: $currentPhotoType")
             }
         }
     }
