@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.testapp.R
 import com.example.testapp.databinding.FragmentRegistration2Binding
 import android.widget.EditText
+import com.example.testapp.Utils.Dependencies
 import com.google.android.material.textfield.TextInputLayout
 import com.luccasmelo.kotlinutils.MaskWatcher
 
@@ -25,6 +26,8 @@ class RegistrationFragment2 : Fragment() {
 
     private val binding
         get() = _binding ?: throw  IllegalStateException("Binding for ActivityNoconnectionBinding must not be null")
+
+    private val viewModel by lazy { RegistrationViewModel(Dependencies.accountRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +48,16 @@ class RegistrationFragment2 : Fragment() {
 
         binding.btnNext.setOnClickListener {
             if (isValidate()) {
+                val surname = binding.inputSurname.text.toString()
+                val name = binding.inputName.text.toString()
+                val middleName = binding.inputMiddleName.text.toString()
+                val birthDate = binding.inputBirthDate.text.toString()
+                val selectedGender = when (binding.rgGender.checkedRadioButtonId) {
+                    binding.radioMale.id -> "Мужской"
+                    binding.radioFemale.id -> "Женский"
+                    else -> "Not Selected"
+                }
+                viewModel.registration2ToViewModel(surname, name, middleName, birthDate, selectedGender)
                 vp?.currentItem = 2
             }
             else Toast.makeText(requireActivity(), "Выполнены не все условия", Toast.LENGTH_SHORT).show()

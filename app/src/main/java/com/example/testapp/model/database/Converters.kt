@@ -36,7 +36,7 @@ class Converters {
 
     // Хеширование пароля
     @TypeConverter
-    fun hashPassword(password: String): String {
+    fun toHashPass(password: String): String {
         return BCrypt.hashpw(password, BCrypt.gensalt())
     }
 

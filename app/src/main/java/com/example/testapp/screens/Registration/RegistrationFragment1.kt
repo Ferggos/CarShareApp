@@ -10,11 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.testapp.R
+import com.example.testapp.Utils.Dependencies
 import com.example.testapp.databinding.FragmentRegistration1Binding
 import com.example.testapp.Utils.FieldValidators.isValidEmail
 import com.example.testapp.Utils.FieldValidators.isStringContainNumber
 import com.example.testapp.Utils.FieldValidators.isStringContainSpecialCharacter
 import com.example.testapp.Utils.FieldValidators.isStringLowerAndUpperCase
+import com.example.testapp.model.database.Converters
 
 class RegistrationFragment1 : Fragment() {
 
@@ -22,6 +24,8 @@ class RegistrationFragment1 : Fragment() {
 
     private val binding
         get() = _binding ?: throw  IllegalStateException("Binding for ActivityNoconnectionBinding must not be null")
+
+    private val viewModel by lazy { RegistrationViewModel(Dependencies.accountRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +38,9 @@ class RegistrationFragment1 : Fragment() {
 
         binding.btnNext.setOnClickListener {
             if (isValidate()) {
+                val mail = binding.inputMail.text.toString()
+                val password = binding.inputPass.text.toString().toLong()
+                viewModel.registration1ToViewModel(mail, password)
                 vp?.currentItem = 1
             }
             else Toast.makeText(requireActivity(), "Выполнены не все условия", Toast.LENGTH_SHORT).show()

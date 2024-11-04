@@ -25,10 +25,18 @@ import com.luccasmelo.kotlinutils.MaskWatcher
 class RegistrationFragment3 : Fragment() {
 
     private var _binding: FragmentRegistration3Binding? = null
-    private var selectedImageUri: Uri? = null
 
     private val binding
         get() = _binding ?: throw  IllegalStateException("Binding for ActivityNoconnectionBinding must not be null")
+
+    private var avatarPhotoUri: Uri? = null
+    private var dlUploadPhotoUri: Uri? = null
+    private var passportUploadPhotoUri: Uri? = null
+    private var currentPhotoType: PhotoType? = null
+
+    private enum class PhotoType {
+        AVATAR, DL_UPLOAD, PASSPORT
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,15 +61,18 @@ class RegistrationFragment3 : Fragment() {
             else Toast.makeText(requireActivity(), "Выполнены не все условия", Toast.LENGTH_SHORT).show()
         }
 
-        binding.ibPhotoExport.setOnClickListener{
+        binding.ibPhotoExport.setOnClickListener {
+            currentPhotoType = PhotoType.AVATAR
             openGallery()
         }
 
-        binding.llDLUploadPhoto.setOnClickListener{
+        binding.llDLUploadPhoto.setOnClickListener {
+            currentPhotoType = PhotoType.DL_UPLOAD
             openGallery()
         }
 
-        binding.llPassportUploadPhoto.setOnClickListener{
+        binding.llPassportUploadPhoto.setOnClickListener {
+            currentPhotoType = PhotoType.PASSPORT
             openGallery()
         }
 
@@ -84,16 +95,16 @@ class RegistrationFragment3 : Fragment() {
         galleryResultLauncher.launch(intent)
     }
 
-    // Обработчик результата выбора изображения из галереи
     private val galleryResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val data: Intent? = result.data
-            selectedImageUri = data?.data
-
-            // Загрузите изображение в ImageButton
-            //selectedImageUri?.let { uri ->
-            //    imageButton.setImageURI(uri)
-            //}
+            val selectedUri = data?.data
+            when (currentPhotoType) {
+                PhotoType.AVATAR -> avatarPhotoUri = selectedUri
+                PhotoType.DL_UPLOAD -> dlUploadPhotoUri = selectedUri
+                PhotoType.PASSPORT -> passportUploadPhotoUri = selectedUri
+                null -> TODO()
+            }
         }
     }
 

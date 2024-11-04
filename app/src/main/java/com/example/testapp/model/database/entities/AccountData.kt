@@ -1,11 +1,9 @@
 package com.example.testapp.model.database.entities
 
-import java.time.LocalDate
-
 data class AccountData(
     val mail: String,
     val hashPassword: String,
-    val registrationDate: LocalDate,
+    val registrationDate: String,
     val avatar: ByteArray,
     val userData: UserData,
     val drivingLicenseData: DrivingLicenseData

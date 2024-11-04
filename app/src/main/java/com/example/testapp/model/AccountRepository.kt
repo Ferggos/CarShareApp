@@ -2,15 +2,16 @@ package com.example.testapp.model
 
 import com.example.testapp.model.database.AccountDataDao
 import com.example.testapp.model.database.AccountInfoTuple
+import com.example.testapp.model.database.entities.AccountData
 import com.example.testapp.model.database.entities.AccountDataDbEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class AccountRepository(private val accountDao: AccountDataDao) {
 
-    suspend fun insertNewAccountData(accountDataDbEntity: AccountDataDbEntity){
+    suspend fun insertNewAccountData(accountData: AccountData){
         withContext(Dispatchers.IO){
-            accountDao.insertNewAccountData(accountDataDbEntity)
+            accountDao.insertNewAccountData(accountData)
         }
     }
 
@@ -22,7 +23,7 @@ class AccountRepository(private val accountDao: AccountDataDao) {
 
     suspend fun removeAccountDataById(id: Long){
         withContext(Dispatchers.IO){
-            accountDao.deleteStatisticDataById(id)
+            accountDao.deleteAccountDataById(id)
         }
     }
 

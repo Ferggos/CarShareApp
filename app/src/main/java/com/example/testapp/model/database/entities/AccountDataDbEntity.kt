@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.time.LocalDate
 
 @Entity(
     tableName = "account_data",
@@ -27,7 +26,7 @@ data class AccountDataDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
     val mail: String,
     @ColumnInfo(name="password")val hashPassword: String,
-    @ColumnInfo(name="registration_date") val registrationDate: LocalDate,
+    @ColumnInfo(name="registration_date") val registrationDate: String,
     val avatar: ByteArray,
     @ColumnInfo(name = "user_data_id") val userDataId: Long,
     @ColumnInfo(name = "dl_data_id") val dlDataId: Long
