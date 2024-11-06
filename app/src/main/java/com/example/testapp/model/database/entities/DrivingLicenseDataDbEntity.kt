@@ -9,5 +9,5 @@ data class DrivingLicenseDataDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "dl_number") val dlNum: Long,
     @ColumnInfo(name = "dl_date") val dlDate: String,
-    @ColumnInfo(name = "dl_photo") val dlPhoto: ByteArray
+    @ColumnInfo(name = "dl_photo") val dlPhoto: String
 )

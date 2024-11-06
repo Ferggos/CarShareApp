@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="20dp"
+    android:paddingHorizontal="10dp"
+    android:orientation="horizontal"
+    android:background="@drawable/item_border"
+    android:layout_marginBottom="8dp">
+
+    <!-- Left container for text and buttons -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:paddingEnd="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <!-- Car name (model) -->
+                <TextView
+                    android:id="@+id/carName"
+                    style="@style/Header3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S 500 Sedan" />
+
+                <!-- Car brand (e.g., Mercedes-Benz) -->
+                <TextView
+                    android:id="@+id/carBrand"
+                    style="@style/SideText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mercedes-Benz" />
+
+                <!-- Car price per day -->
+                <TextView
+                    android:id="@+id/carPrice"
+                    style="@style/Header3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="2500₽ в день" />
+
+                <!-- Car transmission and fuel type -->
+                <TextView
+                    android:id="@+id/carTransmissionFuel"
+                    style="@style/SideText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="A/T • Бензин" />
+            </LinearLayout>
+
+            <!-- Car image on the right side -->
+            <ImageView
+                android:id="@+id/carImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mercdes_png"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+        <!-- Buttons for booking and details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/bookButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/BtnFillStyle"
+                android:text="Забронировать" />
+
+            <Button
+                android:id="@+id/detailsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Детали"
+                style="@style/BtnOutlineStyle" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

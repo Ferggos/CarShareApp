@@ -7,4 +7,5 @@
     <color name="gray">#404040</color>
     <color name="light_gray">#667085</color>
     <color name="transparent">@android:color/transparent</color>
+    <color name = "under_white">#F9F5FF</color>
 </resources>

@@ -16,6 +16,8 @@ class CompleteRegistrationFragment : Fragment() {
     private val binding
         get() = _binding ?: throw  IllegalStateException("Binding for ActivityNoconnectionBinding must not be null")
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,7 +27,6 @@ class CompleteRegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCompleteRegistrationBinding.inflate(layoutInflater)
-
         (activity as? RegistrationActivity)?.setLinearLayoutVisibility(false)
 
         binding.btnNext.setOnClickListener {

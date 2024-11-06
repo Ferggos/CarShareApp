@@ -15,7 +15,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.testapp.R
 import com.example.testapp.databinding.FragmentRegistration2Binding
 import android.widget.EditText
-import com.example.testapp.Utils.Dependencies
+import androidx.fragment.app.activityViewModels
+import com.example.testapp.utils.Dependencies
 import com.google.android.material.textfield.TextInputLayout
 import com.luccasmelo.kotlinutils.MaskWatcher
 
@@ -27,7 +28,9 @@ class RegistrationFragment2 : Fragment() {
     private val binding
         get() = _binding ?: throw  IllegalStateException("Binding for ActivityNoconnectionBinding must not be null")
 
-    private val viewModel by lazy { RegistrationViewModel(Dependencies.accountRepository) }
+    //private val viewModel by lazy { RegistrationViewModel(Dependencies.accountRepository) }
+
+    private val viewModel by activityViewModels<RegistrationViewModel> { RegistrationViewModelFactory(Dependencies.accountRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +48,7 @@ class RegistrationFragment2 : Fragment() {
         binding.inputBirthDate.setOnClickListener {
             showDatePicker(binding.inputBirthDate)
         }
-
+        //val viewModel = ViewModelProvider(requireActivity())[RegistrationViewModel::class.java]
         binding.btnNext.setOnClickListener {
             if (isValidate()) {
                 val surname = binding.inputSurname.text.toString()

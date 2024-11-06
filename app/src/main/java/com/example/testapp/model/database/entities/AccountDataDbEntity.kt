@@ -27,7 +27,7 @@ data class AccountDataDbEntity(
     val mail: String,
     @ColumnInfo(name="password")val hashPassword: String,
     @ColumnInfo(name="registration_date") val registrationDate: String,
-    val avatar: ByteArray,
-    @ColumnInfo(name = "user_data_id") val userDataId: Long,
-    @ColumnInfo(name = "dl_data_id") val dlDataId: Long
+    val avatar: String,
+    @ColumnInfo(name = "user_data_id", index = true) val userDataId: Long,
+    @ColumnInfo(name = "dl_data_id", index = true) val dlDataId: Long
 )

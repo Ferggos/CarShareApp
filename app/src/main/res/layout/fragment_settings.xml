@@ -11,7 +11,7 @@
         style="@style/Header3Colorful"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:text="@string/settings"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

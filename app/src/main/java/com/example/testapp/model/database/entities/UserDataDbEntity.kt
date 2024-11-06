@@ -12,5 +12,5 @@ data class UserDataDbEntity(
     @ColumnInfo(name = "middle_name") val middleName: String,
     @ColumnInfo(name = "birth_date") val birthDate: String,
     val gender: String,
-    @ColumnInfo(name = "passport_photo") val passportPhoto: ByteArray
+    @ColumnInfo(name = "passport_photo") val passportPhoto: String
 )

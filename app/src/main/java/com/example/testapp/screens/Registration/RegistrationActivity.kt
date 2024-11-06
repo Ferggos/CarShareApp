@@ -36,6 +36,7 @@ class RegistrationActivity : AppCompatActivity() {
             insets
         }
 
+
         _binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

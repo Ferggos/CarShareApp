@@ -5,23 +5,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testapp.R
+import com.example.testapp.adapters.CarAdapter
+import com.example.testapp.databinding.FragmentHomePageBinding
+import com.example.testapp.model.Car
 
 class HomePage : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var _binding: FragmentHomePageBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_page, container, false)
+    ): View {
+        _binding = FragmentHomePageBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val cars = listOf(
+            Car("S 500 Sedan", "Mercedes-Benz", "2500₽ в день", "A/T • Бензин", R.drawable.mercdes_png),
+            Car("Model X", "Tesla", "3000₽ в день", "A/T • Electric", R.drawable.mercdes_png),
+            Car("A4", "Audi", "2000₽ в день", "A/T • Бензин", R.drawable.mercdes_png),
+            Car("S 500 Sedan", "Mercedes-Benz", "2500₽ в день", "A/T • Бензин", R.drawable.mercdes_png)
+        )
+
+        binding.rvCar.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvCar.adapter = CarAdapter(cars)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

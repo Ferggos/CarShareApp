@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <!-- Profile title at the top -->
+    <TextView
+        android:id="@+id/profileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        style = "@style/Header3"
+        android:text="Профиль"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="48dp"/>
+
+    <!-- Profile picture and edit icon -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_photo_export_not"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_border"
+            android:layout_centerInParent="true"/>
+
+        <!-- Edit icon over the profile picture -->
+        <ImageView
+            android:id="@+id/editIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_plus"
+            android:layout_alignBottom="@id/profileImage"
+            android:layout_alignEnd="@id/profileImage"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"/>
+    </RelativeLayout>
+
+    <!-- User name and join date -->
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Иван Иванов"
+        style = "@style/Header3"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/joinDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        style = "@style/SideText"
+        android:text="Присоединился в июле 2024"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Divider line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"/>
+
+    <!-- Profile fields -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Email field -->
+        <TextView
+            android:id="@+id/emailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/BaseText"
+            android:text="Электронная почта"
+            android:textColor="#000"
+            android:paddingTop="12dp"/>
+
+        <TextView
+            android:id="@+id/email"
+            style = "@style/SideText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ivanov@mtuci.ru"
+            android:textColor="#777777"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_marginTop="10dp"/>
+
+
+        <!-- Password field -->
+        <TextView
+            android:id="@+id/passwordLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/BaseText"
+            android:text="Пароль"
+            android:textColor="#000"
+            android:paddingTop="12dp"/>
+
+        <TextView
+            android:id="@+id/changePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Поменять пароль"
+            android:clickable="true"
+            android:textColor="#4C245B"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Gender field -->
+        <TextView
+            android:id="@+id/genderLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/BaseText"
+            android:text="Пол"
+            android:textColor="#000"
+            android:paddingTop="12dp"/>
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/SideText"
+            android:text="Мужской"
+            android:textColor="#777777"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Google field -->
+        <TextView
+            android:id="@+id/googleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/BaseText"
+            android:text="Google"
+            android:textColor="#000"
+            android:paddingTop="12dp"/>
+
+        <TextView
+            android:id="@+id/googleEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/SideText"
+            android:text="ivanov@gmail.com"
+            android:textColor="#777777"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Logout button -->
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выйти из профиля"
+        style = "@style/BtnTransparentStyle"
+        android:textColor="#4C245B"
+        android:textStyle="bold"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp"/>
+
+</LinearLayout>

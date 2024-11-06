@@ -1,10 +1,13 @@
 package com.example.testapp.model.database.entities
 
+import androidx.room.TypeConverters
+import com.example.testapp.model.database.PasswordConverter
+
 data class AccountData(
     val mail: String,
-    val hashPassword: String,
+    @TypeConverters(PasswordConverter::class) val hashPassword: String,
     val registrationDate: String,
-    val avatar: ByteArray,
+    val avatar: String,
     val userData: UserData,
     val drivingLicenseData: DrivingLicenseData
 ){

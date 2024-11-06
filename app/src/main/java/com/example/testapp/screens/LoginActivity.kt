@@ -10,13 +10,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.testapp.Utils.FieldValidators.isValidEmail
-import com.example.testapp.Utils.FieldValidators.isStringContainNumber
-import com.example.testapp.Utils.FieldValidators.isStringContainSpecialCharacter
-import com.example.testapp.Utils.FieldValidators.isStringLowerAndUpperCase
+import com.example.testapp.utils.FieldValidators.isValidEmail
+import com.example.testapp.utils.FieldValidators.isStringContainNumber
+import com.example.testapp.utils.FieldValidators.isStringContainSpecialCharacter
+import com.example.testapp.utils.FieldValidators.isStringLowerAndUpperCase
 import com.example.testapp.databinding.ActivityLoginBinding
 import com.example.testapp.screens.Registration.RegistrationActivity
 import com.example.testapp.R
+import com.example.testapp.screens.Main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -41,6 +42,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLog.setOnClickListener{
             if (isValidate()) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 Toast.makeText(this, "Чел харош", Toast.LENGTH_SHORT).show()
             }
         }

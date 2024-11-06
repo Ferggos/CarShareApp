@@ -31,7 +31,7 @@ interface AccountDataDao {
         insertAccountData(accountData.toAccountDataDbEntity(userId, dlId))
     }
 
-    @Query("SELECT account_data.id, avatar, mail, registration_date, name, surname, gender FROM account_data\n" +
+    @Query("SELECT account_data.id, mail, avatar, registration_date, name, surname, gender FROM account_data\n" +
             "INNER JOIN user_data ON account_data.user_data_id = user_data.id\n" +
             "INNER JOIN driving_license_data ON account_data.dl_data_id = driving_license_data.id;")
     fun getAccountData(): List<AccountInfoTuple>

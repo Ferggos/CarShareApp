@@ -7,6 +7,6 @@ data class UserData(
     val middleName: String,
     val birthDate: String,
     val gender: String,
-    val passportPhoto: ByteArray
+    val passportPhoto: String
 )
 

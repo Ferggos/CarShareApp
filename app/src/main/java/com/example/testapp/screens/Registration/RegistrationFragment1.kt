@@ -8,15 +8,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.testapp.R
-import com.example.testapp.Utils.Dependencies
+import com.example.testapp.utils.Dependencies
 import com.example.testapp.databinding.FragmentRegistration1Binding
-import com.example.testapp.Utils.FieldValidators.isValidEmail
-import com.example.testapp.Utils.FieldValidators.isStringContainNumber
-import com.example.testapp.Utils.FieldValidators.isStringContainSpecialCharacter
-import com.example.testapp.Utils.FieldValidators.isStringLowerAndUpperCase
-import com.example.testapp.model.database.Converters
+import com.example.testapp.utils.FieldValidators.isValidEmail
+import com.example.testapp.utils.FieldValidators.isStringContainNumber
+import com.example.testapp.utils.FieldValidators.isStringContainSpecialCharacter
+import com.example.testapp.utils.FieldValidators.isStringLowerAndUpperCase
+
 
 class RegistrationFragment1 : Fragment() {
 
@@ -25,7 +26,9 @@ class RegistrationFragment1 : Fragment() {
     private val binding
         get() = _binding ?: throw  IllegalStateException("Binding for ActivityNoconnectionBinding must not be null")
 
-    private val viewModel by lazy { RegistrationViewModel(Dependencies.accountRepository) }
+    //private val viewModel by lazy { RegistrationViewModel(Dependencies.accountRepository) }
+
+    private val viewModel by activityViewModels<RegistrationViewModel> { RegistrationViewModelFactory(Dependencies.accountRepository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +38,13 @@ class RegistrationFragment1 : Fragment() {
         _binding = FragmentRegistration1Binding.inflate(inflater, container, false)
 
         val vp = activity?.findViewById<ViewPager2>(R.id.vp2)
-
+        //val viewModel = ViewModelProvider(requireActivity())[RegistrationViewModel::class.java]
         binding.btnNext.setOnClickListener {
             if (isValidate()) {
-                val mail = binding.inputMail.text.toString()
-                val password = binding.inputPass.text.toString().toLong()
-                viewModel.registration1ToViewModel(mail, password)
                 vp?.currentItem = 1
+                val mail = binding.inputMail.text.toString()
+                val password = binding.inputPass.text.toString()
+                viewModel.registration1ToViewModel(mail, password)
             }
             else Toast.makeText(requireActivity(), "Выполнены не все условия", Toast.LENGTH_SHORT).show()
         }

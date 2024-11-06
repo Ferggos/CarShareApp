@@ -22,7 +22,7 @@ class Converters {
         return date?.format(formatter)
     }
 
-    @TypeConverter
+    /*@TypeConverter
     fun fromBitmap(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
@@ -32,16 +32,5 @@ class Converters {
     @TypeConverter
     fun toBitmap(byteArray: ByteArray): Bitmap {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-    }
-
-    // Хеширование пароля
-    @TypeConverter
-    fun toHashPass(password: String): String {
-        return BCrypt.hashpw(password, BCrypt.gensalt())
-    }
-
-    // Проверка пароля
-    fun checkPassword(password: String, hashed: String): Boolean {
-        return BCrypt.checkpw(password, hashed)
-    }
+    }*/
 }

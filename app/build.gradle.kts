@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.ir.backend.js.compile
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -48,7 +46,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -60,8 +57,10 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     implementation (libs.androidx.room.runtime)
+    implementation(libs.androidx.fragment.ktx)
     implementation (libs.androidx.room.ktx)
     implementation (libs.mindrot.jbcrypt)
+    //implementation(libs.mediation.test.suite)
     ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

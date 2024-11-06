@@ -17,8 +17,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.testapp.R
+import com.example.testapp.utils.Dependencies
 import com.example.testapp.databinding.FragmentRegistration3Binding
 import com.luccasmelo.kotlinutils.MaskWatcher
 
@@ -28,6 +30,10 @@ class RegistrationFragment3 : Fragment() {
 
     private val binding
         get() = _binding ?: throw  IllegalStateException("Binding for ActivityNoconnectionBinding must not be null")
+
+    //private val viewModel by lazy { RegistrationViewModel(Dependencies.accountRepository) }
+
+    private val viewModel by activityViewModels<RegistrationViewModel> { RegistrationViewModelFactory(Dependencies.accountRepository) }
 
     private var avatarPhotoUri: Uri? = null
     private var dlUploadPhotoUri: Uri? = null
@@ -54,8 +60,14 @@ class RegistrationFragment3 : Fragment() {
 
         val vp = activity?.findViewById<ViewPager2>(R.id.vp2)
 
+        //val viewModel = ViewModelProvider(requireActivity())[RegistrationViewModel::class.java]
+
         binding.btnNext.setOnClickListener {
             if (isValidate()) {
+                val dlNumber = binding.inputDL.text.toString().toLong()
+                val dlDate = binding.inputDLDate.text.toString()
+                viewModel.registration3ToViewModel(dlNumber, dlDate, avatarPhotoUri.toString(), passportUploadPhotoUri.toString(), dlUploadPhotoUri.toString())
+                viewModel.insertNewAccountDataInDatabase()
                 vp?.currentItem = 3
             }
             else Toast.makeText(requireActivity(), "Выполнены не все условия", Toast.LENGTH_SHORT).show()
@@ -183,19 +195,9 @@ class RegistrationFragment3 : Fragment() {
             { _, selectedYear, selectedMonth, selectedDay ->
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(selectedYear, selectedMonth, selectedDay)
-
-                // Calculate the date for 18 years ago
-                val ageThreshold = Calendar.getInstance()
-                ageThreshold.add(Calendar.YEAR, -18)
-
-                if (selectedDate.before(ageThreshold)) {
-                    // Format and set the date if valid
-                    val formattedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-                    targetEditText.setText(formattedDate)
-                } else {
-                    // Show error if under 18
-                    Toast.makeText(requireContext(), "Age must be 18 or older", Toast.LENGTH_SHORT).show()
-                }
+                // Format and set the date if valid
+                val formattedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
+                targetEditText.setText(formattedDate)
             },
             year, month, day
         )

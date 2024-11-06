@@ -1,4 +1,4 @@
-package com.example.testapp.Utils
+package com.example.testapp.utils
 
 import android.content.Context
 import androidx.room.Room
@@ -7,7 +7,7 @@ import com.example.testapp.model.database.AppDatabase
 
 object Dependencies {
 
-    private lateinit var applicationContext: Context
+    private var applicationContext: Context? = null
 
     fun init(context: Context)
     {
@@ -15,8 +15,8 @@ object Dependencies {
     }
 
     private val appDatabase: AppDatabase by lazy{
-        Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database.db")
-            .createFromAsset("room_database.db")
+        val context = applicationContext ?: throw IllegalStateException("Dependencies.init(context) must be called before accessing appDatabase.")
+        Room.databaseBuilder(context, AppDatabase::class.java, "database.db")
             .build()
     }
 

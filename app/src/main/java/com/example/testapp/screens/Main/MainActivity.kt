@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
     private val fragList = listOf(
         HomePage.newInstance(),
         Favourites.newInstance(),
-        Settings.newInstance()
+        Settings.newInstance(),
+        Profile.newInstance()
     )
 
     private var _binding:   ActivityMainBinding? = null
