@@ -31,8 +31,6 @@ class Details : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         // Получаем id автомобиля из аргументов
         arguments?.let {
             carId = it.getInt("CAR_ID", -1) // Получаем id автомобиля
@@ -104,6 +102,10 @@ class Details : Fragment() {
             } else if (source == "Favorites") {
                 mainActivity.navigateToFragment(Favorites()) // Переход на Favorites
             }
+        }
+
+        binding.bookButton.setOnClickListener{
+            mainActivity.navigateToFragment(BookingCar())
         }
 
         binding.ibFavorite.setOnClickListener {

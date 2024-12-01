@@ -1,4 +1,4 @@
-package com.example.testapp.screens.Main
+package com.example.testapp.screens.Main.settingSubDirectory
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,47 +10,56 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.testapp.R
-import com.example.testapp.databinding.FragmentBookingCarBinding
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.testapp.databinding.FragmentBookDetailBinding
+import com.example.testapp.screens.Main.Settings
+import com.example.testapp.screens.Main.MainActivity
 import kotlinx.coroutines.launch
-@AndroidEntryPoint
-class BookingCar : Fragment() {
+import kotlin.getValue
 
-    private var _binding: FragmentBookingCarBinding? = null
+class BookDetail : Fragment() {
+
+    private var _binding: FragmentBookDetailBinding? = null
     private val binding get() = _binding!!
 
     private var carId: Int = -1 // id автомобиля
 
-    private val carsViewModel: CarsViewModel by activityViewModels() // Используем CarsViewModel для получения данных
+    private val bookViewModel: UserBookViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Получаем id автомобиля из аргументов
         arguments?.let {
-            carId = it.getInt(ARG_CAR_ID, -1) // Получаем id автомобиля
+            carId = it.getInt("CAR_ID", -1) // Получаем id автомобиля
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.GONE
 
         // Запускаем корутину для сбора данных из StateFlow
         viewLifecycleOwner.lifecycleScope.launch {
-            carsViewModel.carsList.collect { cars ->
+            bookViewModel.carsList.collect { cars ->
                 // Найдем машину по id
                 val car = cars?.find { it.id == carId }
                 car?.let {
                     // Заполняем данные на экране
+                    binding.tvWelcomeText.text = "Бронирование #${it.id}"
                     binding.carName.text = it.model
                     binding.carBrand.text = it.brand
                     binding.carPrice.text = "${it.price}₽ в день"
-                    binding.tvAddress.text = it.address
-                    binding.tvRentPrice.text = "${it.price}₽/день"
-                    binding.tvFinalSum.text = "${it.price*3}₽"
                     Glide.with(binding.carImage.context)
                         .load(it.imageLogo)
                         .into(binding.carImage)
+                    binding.tvAddress.text = it.address
+                    binding.tvStartDate.text = it.startDate
+                    binding.tvEndDate.text = it.endDate
+                    binding.tvUserData.text = "Иван Иванов"
+                    binding.tvDLNumber.text = "456134"
+                    binding.tvStatus.text = it.status
+                    binding.tvRentPrice.text = "${it.price}₽/день"
+                    binding.tvFinalSum.text = "${it.price * 3}₽"
+
                 }
             }
         }
@@ -60,20 +69,13 @@ class BookingCar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.GONE
-        _binding = FragmentBookingCarBinding.inflate(inflater, container, false)
+        _binding = FragmentBookDetailBinding.inflate(inflater, container, false)
+
         val mainActivity = requireActivity() as MainActivity
 
-
-
-        binding.ibBack.setOnClickListener{
-            mainActivity.navigateToFragment(HomePage())
+        binding.ibBack.setOnClickListener {
             activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.VISIBLE
-        }
-
-        binding.btnNext.setOnClickListener{
-            mainActivity.navigateToFragment(HomePage())
-            activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.VISIBLE
+            mainActivity.navigateToFragment(Settings()) // Переход на Favorites
         }
         return binding.root
     }
@@ -85,13 +87,13 @@ class BookingCar : Fragment() {
     }
 
     companion object {
-        private const val ARG_CAR_ID = "car_id"
-
         @JvmStatic
-        fun newInstance(carId: Int) = BookingCar().apply {
-            arguments = Bundle().apply {
-                putInt(ARG_CAR_ID, carId) // Сохраняем только id автомобиля
-            }
+        fun newInstance(carId: Int): BookDetail {
+            val fragment = BookDetail()
+            val args = Bundle()
+            args.putInt("CAR_ID", carId)
+            fragment.arguments = args
+            return fragment
         }
     }
 }

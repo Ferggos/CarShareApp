@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.testapp.databinding.FragmentSettingsBinding
 import com.example.testapp.screens.Main.settingSubDirectory.Profile
+import com.example.testapp.screens.Main.settingSubDirectory.UserBooking
 
 
 class Settings : Fragment() {
@@ -29,6 +30,10 @@ class Settings : Fragment() {
 
         binding.llProfileSection.setOnClickListener{
             mainActivity.navigateToFragment(Profile())
+        }
+
+        binding.btnBookings.setOnClickListener{
+            mainActivity.navigateToFragment(UserBooking())
         }
         return binding.root
     }

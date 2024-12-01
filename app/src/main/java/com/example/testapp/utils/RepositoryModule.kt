@@ -4,6 +4,8 @@ import com.example.testapp.domain.availableCars.CarsRepository
 import com.example.testapp.domain.availableCars.CarsRepositoryImpl
 import com.example.testapp.domain.favorites.FavoriteRepository
 import com.example.testapp.domain.favorites.FavoriteRepositoryImpl
+import com.example.testapp.domain.userBooks.BookRepository
+import com.example.testapp.domain.userBooks.BookRepositoryImpl
 
 
 import dagger.Module
@@ -34,5 +36,13 @@ object RepositoryModule {
         storage: Storage
     ): FavoriteRepository {
         return FavoriteRepositoryImpl(postgrest, storage)
+    }
+    @Provides
+    @Singleton
+    fun provideUserBookRepository(
+        postgrest: Postgrest,
+        storage: Storage
+    ): BookRepository {
+        return BookRepositoryImpl(postgrest, storage)
     }
 }
