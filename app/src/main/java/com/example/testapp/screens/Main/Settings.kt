@@ -5,9 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.viewpager2.widget.ViewPager2
-import com.example.testapp.R
 import com.example.testapp.databinding.FragmentSettingsBinding
+import com.example.testapp.screens.Main.settingSubDirectory.Profile
 
 
 class Settings : Fragment() {
@@ -26,10 +25,10 @@ class Settings : Fragment() {
     ): View? {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
-        val vp = activity?.findViewById<ViewPager2>(R.id.vp2)
+        val mainActivity = requireActivity() as MainActivity
 
         binding.llProfileSection.setOnClickListener{
-            vp?.currentItem = 3
+            mainActivity.navigateToFragment(Profile())
         }
         return binding.root
     }

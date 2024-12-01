@@ -50,7 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="685dp"
         android:layout_marginTop="30dp"
-        android:paddingHorizontal="30dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

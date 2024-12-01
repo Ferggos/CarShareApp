@@ -1,20 +1,32 @@
 package com.example.testapp.screens.Main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testapp.R
 import com.example.testapp.adapters.CarAdapter
 import com.example.testapp.databinding.FragmentHomePageBinding
 import com.example.testapp.model.Car
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomePage : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
+
+    private val carViewModel by activityViewModels<CarsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,15 +39,17 @@ class HomePage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cars = listOf(
-            Car("S 500 Sedan", "Mercedes-Benz", "2500₽ в день", "A/T • Бензин", R.drawable.mercdes_png),
-            Car("Model X", "Tesla", "3000₽ в день", "A/T • Electric", R.drawable.mercdes_png),
-            Car("A4", "Audi", "2000₽ в день", "A/T • Бензин", R.drawable.mercdes_png),
-            Car("S 500 Sedan", "Mercedes-Benz", "2500₽ в день", "A/T • Бензин", R.drawable.mercdes_png)
-        )
-
         binding.rvCar.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvCar.adapter = CarAdapter(cars)
+        val mainActivity = activity as MainActivity
+
+        // Собираем Flow и обновляем адаптер, когда данные изменяются
+        lifecycleScope.launch {
+            carViewModel.carsList.collectLatest { cars ->
+                cars?.let {
+                    binding.rvCar.adapter = CarAdapter(it, mainActivity)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -48,3 +62,4 @@ class HomePage : Fragment() {
         fun newInstance() = HomePage()
     }
 }
+

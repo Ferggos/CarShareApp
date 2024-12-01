@@ -1,22 +1,23 @@
 package com.example.testapp.screens.Main
 
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.testapp.screens.adapters.VPAdapter
+import androidx.fragment.app.Fragment
 import com.example.testapp.databinding.ActivityMainBinding
 import com.example.testapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val fragList = listOf(
         HomePage.newInstance(),
-        Favourites.newInstance(),
-        Settings.newInstance(),
-        Profile.newInstance()
+        Favorites.newInstance(),
+        Settings.newInstance()
     )
 
     private var _binding:   ActivityMainBinding? = null
@@ -36,33 +37,39 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Disable swiping from User
-        binding.vp2.setUserInputEnabled(false);
-
-        val adapter = VPAdapter(this, fragList)
-        binding.vp2.adapter = adapter
         binding.ibHome.setImageResource(R.drawable.ic_home_pushed)
+        navigateToFragment(HomePage())
 
         binding.ibHome.setOnClickListener {
-            changePage(binding, 0)
+            changeButtonState(binding.ibHome, R.drawable.ic_home_pushed)
+            navigateToFragment(HomePage())
         }
 
         binding.ibMarks.setOnClickListener {
-            changePage(binding, 1)
+            changeButtonState(binding.ibMarks, R.drawable.ic_bookmark_pushed)
+            navigateToFragment(Favorites())
         }
 
         binding.ibSettings.setOnClickListener {
-            changePage(binding, 2)
+            changeButtonState(binding.ibSettings, R.drawable.ic_settings_pushed)
+            navigateToFragment(Settings())
         }
     }
 
+    private fun changeButtonState(activeButton: ImageButton, pushedIconRes: Int) {
+        // Сбрасываем состояние всех кнопок
+        binding.ibHome.setImageResource(R.drawable.ic_home)
+        binding.ibMarks.setImageResource(R.drawable.ic_bookmark)
+        binding.ibSettings.setImageResource(R.drawable.ic_settings)
 
-    private fun changePage(binding: ActivityMainBinding, selectedItem: Int) {
+        // Устанавливаем "нажатое" состояние для активной кнопки
+        activeButton.setImageResource(pushedIconRes)
+    }
 
-        binding.ibHome.setImageResource(if (selectedItem == 0) R.drawable.ic_home_pushed else R.drawable.ic_home)
-        binding.ibMarks.setImageResource(if (selectedItem == 1) R.drawable.ic_bookmark_pushed else R.drawable.ic_bookmark)
-        binding.ibSettings.setImageResource(if (selectedItem == 2) R.drawable.ic_settings_pushed else R.drawable.ic_settings)
-
-        binding.vp2.currentItem = selectedItem
+    fun navigateToFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fcv, fragment) // ID вашего контейнера
+            .addToBackStack(null) // Добавляем в BackStack для возврата
+            .commit()
     }
 }

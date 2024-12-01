@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20"
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -14,10 +16,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -61,6 +59,17 @@ dependencies {
     implementation (libs.androidx.room.ktx)
     implementation (libs.mindrot.jbcrypt)
     //implementation(libs.mediation.test.suite)
+    implementation ("io.github.jan-tennert.supabase:postgrest-kt:3.0.1")
+    implementation ("io.github.jan-tennert.supabase:storage-kt:3.0.1")
+    implementation ("io.github.jan-tennert.supabase:auth-kt:3.0.1")
+    implementation ("io.ktor:ktor-client-android:3.0.0")
+    implementation ("io.ktor:ktor-client-core:3.0.0")
+    implementation ("io.ktor:ktor-utils:3.0.0")
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.google.dagger:hilt-android:2.48")
+    ksp ("com.google.dagger:hilt-compiler:2.48")
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.ktor.client.cio)
     ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
