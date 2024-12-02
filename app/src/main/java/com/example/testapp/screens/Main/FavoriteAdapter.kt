@@ -32,13 +32,13 @@ class FavoriteAdapter(
 
             binding.detailsButton.setOnClickListener {
                 val carId = car.carId // Получаем id автомобиля
-                val detailsFragment = Details.newInstance(carId, "Favorites") // Передаем только id
+                val detailsFragment = Details.newInstance(carId, "Favorites")
                 mainActivity.navigateToFragment(detailsFragment) // Переход на фрагмент с деталями
             }
 
             binding.bookButton.setOnClickListener {
-                val carId = car.id // Получаем id автомобиля
-                val bookingFragment = BookingCar.newInstance(carId) // Передаем только id
+                val carId = car.carId // Получаем id автомобиля
+                val bookingFragment = BookingCar.newInstance(carId)
                 mainActivity.navigateToFragment(bookingFragment) // Переход на фрагмент с деталями
             }
         }

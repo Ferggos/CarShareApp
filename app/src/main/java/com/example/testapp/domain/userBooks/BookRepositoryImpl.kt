@@ -51,7 +51,7 @@ class BookRepositoryImpl @Inject constructor(
                     startDate = bookCar.startDate,
                     endDate = bookCar.endDate
                 )
-                postgrest["user_books"].insert(car)
+                postgrest.from("user_books").insert(car)
                 true
             }
             true
@@ -70,5 +70,20 @@ class BookRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun updateProduct(id: Int, status: String) {
+        return withContext(Dispatchers.IO) {
+            Log.d("Supabase", "Updating product")
+            postgrest.from("user_books").update({
+                set("status", status)
+            }) {
+                filter {
+                    eq("id", id)
+                }
+
+            }
+        }
+    }
+
 
 }

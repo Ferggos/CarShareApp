@@ -8,4 +8,5 @@ interface BookRepository {
     suspend fun getCar(id: Int): UserBooksDto
     suspend fun inputBook(bookCar: BookCar): Boolean
     suspend fun deleteProduct(id: String)
+    suspend fun updateProduct(id: Int, status: String)
 }

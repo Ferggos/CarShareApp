@@ -29,7 +29,7 @@ class UserBookAdapter(
             }
             binding.llBookCarItem.setOnClickListener {
                 val carId = car.id // Получаем id автомобиля
-                val bookDetailFragment = BookDetail.newInstance(carId) // Передаем только id
+                val bookDetailFragment = BookDetail.newInstance(carId)
                 mainActivity.navigateToFragment(bookDetailFragment) // Переход на фрагмент с деталями
             }
 

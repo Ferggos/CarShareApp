@@ -2,11 +2,7 @@ package com.example.testapp.screens.Main.settingSubDirectory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testapp.data.tables.AvailableCarsDto
 import com.example.testapp.data.tables.UserBooksDto
-import com.example.testapp.domain.availableCars.AvailableCar
-import com.example.testapp.domain.availableCars.CarsRepository
-import com.example.testapp.domain.favorites.FavoriteRepository
 import com.example.testapp.domain.userBooks.BookCar
 import com.example.testapp.domain.userBooks.BookRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,6 +33,26 @@ class UserBookViewModel @Inject constructor(
 
     fun getCarById(id: Int): BookCar? {
         return _carsList.value?.find { it.id == id }
+    }
+
+    fun bookCar(bookCar: BookCar): Boolean {
+        return try {
+            viewModelScope.launch {
+                bookRepository.inputBook(bookCar)
+                getCars()
+            }
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    fun updateStatus(id: Int, status:String){
+        viewModelScope.launch{
+            bookRepository.updateProduct(id, status)
+            getCars()
+        }
     }
 
     private fun UserBooksDto.asDomainModel(): BookCar {

@@ -33,13 +33,13 @@ class CarAdapter(
 
             binding.detailsButton.setOnClickListener {
                 val carId = car.id // Получаем id автомобиля
-                val detailsFragment = Details.newInstance(carId, "HomePage") // Передаем только id
+                val detailsFragment = Details.newInstance(carId, "HomePage")
                 mainActivity.navigateToFragment(detailsFragment) // Переход на фрагмент с деталями
             }
 
             binding.bookButton.setOnClickListener {
                 val carId = car.id // Получаем id автомобиля
-                val bookingFragment = BookingCar.newInstance(carId) // Передаем только id
+                val bookingFragment = BookingCar.newInstance(carId)
                 mainActivity.navigateToFragment(bookingFragment) // Переход на фрагмент с деталями
             }
         }

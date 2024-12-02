@@ -1,6 +1,5 @@
 package com.example.testapp.screens.Main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testapp.data.tables.AvailableCarsDto

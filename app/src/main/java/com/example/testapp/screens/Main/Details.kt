@@ -105,7 +105,8 @@ class Details : Fragment() {
         }
 
         binding.bookButton.setOnClickListener{
-            mainActivity.navigateToFragment(BookingCar())
+            val bookingFragment = BookingCar.newInstance(carId) // Передаем только id
+            mainActivity.navigateToFragment(bookingFragment)
         }
 
         binding.ibFavorite.setOnClickListener {

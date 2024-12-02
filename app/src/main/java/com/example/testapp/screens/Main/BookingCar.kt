@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.testapp.R
 import com.example.testapp.databinding.FragmentBookingCarBinding
+import com.example.testapp.domain.userBooks.BookCar
+import com.example.testapp.screens.Main.settingSubDirectory.UserBookViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
@@ -21,7 +23,8 @@ class BookingCar : Fragment() {
 
     private var carId: Int = -1 // id автомобиля
 
-    private val carsViewModel: CarsViewModel by activityViewModels() // Используем CarsViewModel для получения данных
+    private val carsViewModel: CarsViewModel by activityViewModels()
+    private val bookViewModel: UserBookViewModel by activityViewModels()// Используем CarsViewModel для получения данных
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +38,7 @@ class BookingCar : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Запускаем корутину для сбора данных из StateFlow
+        // Запускаем корутину для сбора данных из Flow
         viewLifecycleOwner.lifecycleScope.launch {
             carsViewModel.carsList.collect { cars ->
                 // Найдем машину по id
@@ -70,17 +73,37 @@ class BookingCar : Fragment() {
             mainActivity.navigateToFragment(HomePage())
             activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.VISIBLE
         }
+        binding.btnNext.setOnClickListener {
+            // Обработка кнопки "Далее"
+            lifecycleScope.launch {
+                carsViewModel.carsList.collect { carsList ->
+                    val car = carsList?.find { it.id == carId }
+                    car?.let {
+                        val bookCar = BookCar(
+                            id = it.id,
+                            brand = it.brand,
+                            model = it.model,
+                            price = it.price,
+                            imageLogo = it.imageLogo,
+                            address = it.address,
+                            status = "Одобрено",
+                            startDate = "18:00, 2 декабря 2024",
+                            endDate = "18:00, 5 декабря 2024"
+                        )
 
-        binding.btnNext.setOnClickListener{
-            mainActivity.navigateToFragment(HomePage())
-            activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.VISIBLE
+                        val isSuccessful = bookViewModel.bookCar(bookCar)
+                        if (isSuccessful) {
+                            mainActivity.navigateToFragment(SuccessBook())
+                        }
+                    }
+                }
+            }
         }
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.VISIBLE
         _binding = null
     }
 
@@ -90,7 +113,7 @@ class BookingCar : Fragment() {
         @JvmStatic
         fun newInstance(carId: Int) = BookingCar().apply {
             arguments = Bundle().apply {
-                putInt(ARG_CAR_ID, carId) // Сохраняем только id автомобиля
+                putInt(ARG_CAR_ID, carId)
             }
         }
     }

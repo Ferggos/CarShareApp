@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -63,6 +64,8 @@ class BookDetail : Fragment() {
                 }
             }
         }
+
+
     }
 
     override fun onCreateView(
@@ -75,7 +78,14 @@ class BookDetail : Fragment() {
 
         binding.ibBack.setOnClickListener {
             activity?.findViewById<LinearLayout>(R.id.llNav)?.visibility = View.VISIBLE
-            mainActivity.navigateToFragment(Settings()) // Переход на Favorites
+            mainActivity.navigateToFragment(UserBooking()) // Переход на Favorites
+        }
+
+        binding.btnCancel.setOnClickListener{
+            viewLifecycleOwner.lifecycleScope.launch {
+                bookViewModel.updateStatus(carId, "Отмена")
+            }
+            mainActivity.navigateToFragment(UserBooking())
         }
         return binding.root
     }
